@@ -3,6 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <title>● 課題5_1, リストにページング処理を加える</title>
+<style>
+	div#pagenation {
+	   position: relative;
+	   overflow: hidden;
+	}
+	div#pagenation ul {
+	    position:relative;
+	    left:50%;
+	    float:left;
+	    list-style: none;
+	}
+	div#pagenation li {
+	    position:relative;
+	    left:-50%;
+	    float:left;
+	}
+	div#pagenation li a {
+	    border:1px solid #CECECE;
+	    margin: 0 3px;
+	    padding:3px 7px;
+	    display: block;
+	    text-decoration:none;
+	    color: #666666;
+	    background: #fff;
+	}
+	div#pagenation li.active {
+	    border:solid 1px #666666;
+	    color: #FFFFFF;
+	    background: #3399FF;
+	    margin: 0 3px;
+        padding: 3px 7px;
+	}
+	div#pagenation li a:hover{
+	    border:solid 1px #666666;
+	    color: #FFFFFF;
+	    background: #3399FF;
+	}
+</style>
 </head>
 <body>
 <h1>● 課題5_1, リストにページング処理を加える</h1>
@@ -116,9 +154,9 @@ if ($loop_end > $obj->total_page)
 
 <?php
 
-
-$offset = ($page - 1)*10;
-$result = mysql_query("SELECT * FROM `kadai_matsui_ziplist` WHERE 1 LIMIT {$offset},10");
+$limit=5;
+$offset = ($page - 1)*$limit;
+$result = mysql_query("SELECT * FROM `kadai_matsui_ziplist` WHERE 1 LIMIT {$offset},{$limit}");
 
 
 print <<<EOM
