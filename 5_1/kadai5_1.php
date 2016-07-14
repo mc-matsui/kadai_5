@@ -35,7 +35,7 @@
 	    margin: 0 3px;
         padding: 3px 7px;
 	}
-	div#pagenation li a:hover{
+	div#pagenation li a:hover {
 	    border:solid 1px #666666;
 	    color: #FFFFFF;
 	    background: #3399FF;
@@ -52,11 +52,13 @@ require_once( 'kadai5_1_pager.php' );
 //DB接続
 $link = mysql_connect("localhost","root","3212");
 mysql_query("SET NAMES utf8",$link);
-if (!$link) {
+if (!$link)
+{
 	die("接続できませんでした" .mysql_error());
 }
 $db = mysql_select_db("test" , $link);
-if (!$db) {
+if (!$db)
+{
 	die("データベース接続エラーです。" .mysql_error());
 }
 
@@ -76,12 +78,15 @@ if(isset($_GET["page"]))
 	//ページリンク押した場合GET値取得、偽の場合1
 	$page = $_GET["page"];
 	$obj->pager($page, $rows);
-}else{
+}
+else
+{
 	$page = 1;
 	$obj->pager($page, $rows);
 }
 //全てのページ数が表示するページ数より小さい場合、総ページを表示する数にする
-if ($obj->total_page < $obj->show_nav) {
+if ($obj->total_page < $obj->show_nav)
+{
 	$obj->show_nav = $obj->total_page;
 }
 
@@ -118,7 +123,8 @@ if ($loop_end > $obj->total_page)
  * DBのレコード数が表示レコード数を下回っていれば
  * ページリンク表示しない。
  */
-if ($rows >= $obj->page_rec) {
+if ($rows >= $obj->page_rec)
+{
 
 ?>
 	    <div id="pagenation">
