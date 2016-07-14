@@ -13,7 +13,7 @@ class page
 	{
 		$this->current_page = $c;     //現在のページ
 		$this->total_rec = $total;    //総レコード数
-		$this->page_rec   = 5;   //１ページに表示するレコード
+		$this->page_rec   = 10;   //１ページに表示するレコード
 		$this->total_page = ceil($this->total_rec / $this->page_rec); //総ページ数
 		$this->show_nav = 5;  //表示するナビゲーションの数
 		$this->path = '?page=';   //パーマリンク

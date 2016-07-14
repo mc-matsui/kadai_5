@@ -65,6 +65,7 @@ $result = mysql_query("SELECT * FROM `kadai_matsui_ziplist` WHERE 1");
 //結果セットの行数を取得する
 $rows = mysql_num_rows($result);
 
+
 //現在のページ, 総レコード数(ページャーファイルに遷移)
 //pager($now, $rows);
 
@@ -79,17 +80,20 @@ if(isset($_GET["page"]))
 	$page = 1;
 	$obj->pager($page, $rows);
 }
-
-
 //全てのページ数が表示するページ数より小さい場合、総ページを表示する数にする
 if ($obj->total_page < $obj->show_nav) {
 	$obj->show_nav = $obj->total_page;
 }
+
 //トータルページ数が2以下か、現在のページが総ページより大きい場合表示しない
+/*
 if ($obj->total_page <= 1 || $obj->total_page < $obj->current_page )
 {
 	return;
 }
+*/
+
+
 //総ページの半分
 $obj->show_navh = floor($obj->show_nav / 2);
 //現在のページをナビゲーションの中心にする
@@ -106,6 +110,16 @@ if ($loop_end > $obj->total_page)
 	$loop_start  = $obj->total_page - $obj->show_nav +1;
 	$loop_end =  $obj->total_page;
 }
+
+
+//var_dump($rows,$obj->page_rec);
+
+/*
+ * DBのレコード数が表示レコード数を下回っていれば
+ * ページリンク表示しない。
+ */
+if ($rows >= $obj->page_rec) {
+
 ?>
 	    <div id="pagenation">
 	        <ul>
@@ -154,7 +168,10 @@ if ($loop_end > $obj->total_page)
 
 <?php
 
-$limit=5;
+
+}
+
+$limit=10;
 $offset = ($page - 1)*$limit;
 $result = mysql_query("SELECT * FROM `kadai_matsui_ziplist` WHERE 1 LIMIT {$offset},{$limit}");
 
